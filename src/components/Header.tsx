@@ -1,7 +1,8 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { Auth } from "../types/Auth";
+import HeaderTotal from "./HeaderTotal";
 
 const Header = () => {
   const { auth, mutate } = useAuth();
@@ -13,7 +14,7 @@ const Header = () => {
 
   return (
     <Stack
-      sx={{ marginTop: 1, backgroundColor: "lightgray", p: 1, borderRadius: 2 }}
+      sx={{ backgroundColor: "lightgray", p: 1 }}
       direction="row"
       spacing={2}
       alignItems="center"
@@ -37,9 +38,7 @@ const Header = () => {
           </>
         )}
       </Box>
-      <Typography variant="h6" component="h6">
-        Total Paid: {0}
-      </Typography>
+      {auth?.email && <HeaderTotal />}
     </Stack>
   );
 };

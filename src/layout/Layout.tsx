@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { FC, ReactNode } from "react";
 import Header from "../components/Header";
 
@@ -8,10 +8,10 @@ interface IProps {
 
 const Layout: FC<IProps> = ({ children }) => {
   return (
-    <Container maxWidth="xl">
+    <Box>
       <Header />
-      {children}
-    </Container>
+      <Container maxWidth="xl">{children}</Container>
+    </Box>
   );
 };
 
