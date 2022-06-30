@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import Loading from "../components/Loading";
 import NotFound from "../pages/NotFound";
 import routes from "../routes/routes";
 import ErrorBoundary from "./ErrorBoundary";
@@ -8,7 +9,7 @@ import PrivateOutlet from "./PrivateOutlet";
 const MainContents = () => {
   return (
     <ErrorBoundary>
-      <Suspense fallback={<h1>Loading..</h1>}>
+      <Suspense fallback={<Loading />}>
         <Routes>
           {routes.slice(0, 2).map(({ path, Component }, index) => {
             return <Route key={index} path={path} element={<Component />} />;

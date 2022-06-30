@@ -1,12 +1,12 @@
 import { Suspense } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const PrivateOutlet = () => {
-  //   const { admin } = useAdmin();
-  const admin = { email: "admin@gmail.com" };
+  const { auth } = useAuth();
   const { pathname } = useLocation();
 
-  return admin.email ? (
+  return auth?.email ? (
     <Suspense fallback={null}>
       <Outlet />
     </Suspense>

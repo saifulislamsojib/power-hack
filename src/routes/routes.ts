@@ -1,6 +1,8 @@
+import { lazy } from "react";
 import Home from "../pages/Home";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
+const Billing = lazy(() => import("../pages/Billing"));
+const Register = lazy(() => import("../pages/Register"));
+const Login = lazy(() => import("../pages/Login"));
 
 const routes = [
   {
@@ -12,8 +14,12 @@ const routes = [
     Component: Register,
   },
   {
-    path: "/*",
+    path: "",
     Component: Home,
+  },
+  {
+    path: "billing",
+    Component: Billing,
   },
 ];
 
