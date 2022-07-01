@@ -1,14 +1,17 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { FC } from "react";
+import { Dispatch, FC, FormEvent, SetStateAction } from "react";
 
 interface IProps {
   handleModalOpen: () => void;
+  setSearch: Dispatch<SetStateAction<string>>;
 }
 
-const TopBar: FC<IProps> = ({ handleModalOpen }) => {
-  const handleSearch = () => {
-    console.log("Search");
+const TopBar: FC<IProps> = ({ handleModalOpen, setSearch }) => {
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    setSearch(formData.get("search") as string);
   };
 
   return (
@@ -23,8 +26,14 @@ const TopBar: FC<IProps> = ({ handleModalOpen }) => {
         <Typography variant="h6" component="h6">
           Billings
         </Typography>
-        <Box sx={{ ml: 2 }} component="form" noValidate onSubmit={handleSearch}>
-          <TextField size="small" name="search" type="search" label="Search" />
+        <Box sx={{ ml: 2 }} component="form" onSubmit={handleSearch}>
+          <TextField
+            onChange={(e) => e.currentTarget.value === "" && setSearch("")}
+            size="small"
+            name="search"
+            type="search"
+            label="Search"
+          />
         </Box>
       </Stack>
       <Button onClick={handleModalOpen} variant="contained">

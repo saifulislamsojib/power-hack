@@ -1,6 +1,6 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import { BillingInfo } from "../../types/Billing";
+import { Billing, BillingInfo } from "../../types/Billing";
 
 const inputs = [
   {
@@ -39,9 +39,10 @@ const inputs = [
 
 interface IProps {
   onSubmit: (info: BillingInfo) => void;
+  updateData?: Billing;
 }
 
-const BillingModal = ({ onSubmit }: IProps) => {
+const BillingModal = ({ onSubmit, updateData }: IProps) => {
   const {
     handleSubmit,
     formState: { errors },
@@ -61,6 +62,7 @@ const BillingModal = ({ onSubmit }: IProps) => {
             name={name}
             control={control}
             rules={rules}
+            defaultValue={updateData?.[name]}
             render={({ field }) => (
               <TextField
                 fullWidth
@@ -79,7 +81,7 @@ const BillingModal = ({ onSubmit }: IProps) => {
         </Grid>
       ))}
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2 }}>
-        Add The Billing
+        {updateData ? "Update The Billing" : "Add The Billing"}
       </Button>
     </Box>
   );

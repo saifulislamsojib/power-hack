@@ -7,10 +7,18 @@ const fetcher = (url: string) =>
     .get<{ billingList: Billing[] }>(url)
     .then(({ billingList }) => billingList);
 
-const useBillings = () => {
-  const { data: billingList, mutate } = useSWR("/billing-list", fetcher, {
-    suspense: true,
-  });
+const useBillings = (page?: number, select?: string, search?: string) => {
+  const { data: billingList, mutate } = useSWR(
+    `/billing-list?${page ? `page=${page}` : ""}${page && select ? "&" : ""}${
+      select ? `select=${select}` : ""
+    }${(page && search) || (select && search) ? "&" : ""}${
+      search ? `search=${search}` : ""
+    }`,
+    fetcher,
+    {
+      suspense: true,
+    }
+  );
 
   return {
     billingList,

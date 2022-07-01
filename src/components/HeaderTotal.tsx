@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import useBillings from "../hooks/useBillings";
 
 const HeaderTotal = () => {
-  const { billingList } = useBillings();
+  const { billingList } = useBillings(undefined, "paidAmount");
 
   const total = useMemo(
     () =>
