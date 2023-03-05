@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const baseURL = "https://power-hack-server.herokuapp.com/api";
+const baseURL = "https://power-hack-server.vercel.app/api";
 
 const instance = axios.create({
   baseURL,
